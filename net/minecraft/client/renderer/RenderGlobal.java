@@ -1347,7 +1347,6 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
         }
     }
 
-    @SuppressWarnings("incomplete-switch")
     private void renderBlockLayer(EnumWorldBlockLayer blockLayerIn)
     {
         this.mc.entityRenderer.enableLightmap();

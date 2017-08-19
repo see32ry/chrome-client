@@ -1,21 +1,5 @@
 package net.minecraft.client;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Queues;
-import com.google.common.collect.Sets;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListenableFutureTask;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
-import com.mojang.authlib.properties.Property;
-import com.mojang.authlib.properties.PropertyMap;
-import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
-
-import me.ihaq.chrome.Chrome;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +21,45 @@ import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
+
 import javax.imageio.ImageIO;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Validate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.Sys;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.ContextCapabilities;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.OpenGLException;
+import org.lwjgl.opengl.PixelFormat;
+import org.lwjgl.util.glu.GLU;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Queues;
+import com.google.common.collect.Sets;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListenableFutureTask;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.minecraft.MinecraftSessionService;
+import com.mojang.authlib.properties.Property;
+import com.mojang.authlib.properties.PropertyMap;
+import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
+
+import me.ihaq.chrome.Chrome;
+import me.ihaq.chrome.event.events.misc.EventKeyboard;
+import me.ihaq.chrome.event.events.misc.EventMiddleClick;
+import me.ihaq.chrome.event.events.update.EventTick;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -170,23 +192,6 @@ import net.minecraft.world.chunk.storage.AnvilSaveConverter;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.Validate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GLContext;
-import org.lwjgl.opengl.OpenGLException;
-import org.lwjgl.opengl.PixelFormat;
-import org.lwjgl.util.glu.GLU;
 
 public class Minecraft implements IThreadListener, IPlayerUsage {
 	private static final Logger logger = LogManager.getLogger();
@@ -1564,6 +1569,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 	 * Runs the current tick.
 	 */
 	public void runTick() throws IOException {
+
+		EventTick tick = new EventTick();
+		tick.call();
+
 		if (this.rightClickDelayTimer > 0) {
 			--this.rightClickDelayTimer;
 		}
@@ -1711,6 +1720,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 					if (k == 62 && this.entityRenderer != null) {
 						this.entityRenderer.switchUseShader();
 					}
+
+					EventKeyboard keyBoardEvent = new EventKeyboard(k);
+					keyBoardEvent.call();
 
 					if (this.currentScreen != null) {
 						this.currentScreen.handleKeyboardInput();
@@ -2171,6 +2183,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage {
 	 */
 	private void middleClickMouse() {
 		if (this.objectMouseOver != null) {
+
+			EventMiddleClick e = new EventMiddleClick();
+			e.call();
+
 			boolean flag = this.thePlayer.capabilities.isCreativeMode;
 			int i = 0;
 			boolean flag1 = false;

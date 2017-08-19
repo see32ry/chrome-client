@@ -1867,11 +1867,6 @@ public class GameSettings
     {
         String s = I18n.format(p_getKeyBindingOF_1_.getEnumString(), new Object[0]) + ": ";
 
-        if (s == null)
-        {
-            s = p_getKeyBindingOF_1_.getEnumString();
-        }
-
         if (p_getKeyBindingOF_1_ == GameSettings.Options.RENDER_DISTANCE)
         {
             int k = (int)this.getOptionFloatValue(p_getKeyBindingOF_1_);
