@@ -2,8 +2,8 @@ package me.ihaq.chrome.module;
 
 import java.util.ArrayList;
 
-import me.ihaq.chrome.module.mods.render.FullBright;
-import me.ihaq.chrome.module.mods.render.HUD;
+import me.ihaq.chrome.module.render.FullBright;
+import me.ihaq.chrome.module.render.HUD;
 
 public class ModuleManager {
 
