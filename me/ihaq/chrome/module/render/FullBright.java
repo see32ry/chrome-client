@@ -1,4 +1,4 @@
-package me.ihaq.chrome.module.mods.render;
+package me.ihaq.chrome.module.render;
 
 import org.lwjgl.input.Keyboard;
 
