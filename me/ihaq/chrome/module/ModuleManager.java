@@ -3,7 +3,7 @@ package me.ihaq.chrome.module;
 import java.util.ArrayList;
 
 import me.ihaq.chrome.module.render.FullBright;
-import me.ihaq.chrome.module.render.HUD;
+import me.ihaq.chrome.module.render.hud.HUD;
 
 public class ModuleManager {
 

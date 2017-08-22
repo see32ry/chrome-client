@@ -24,7 +24,7 @@ public class Module {
 	}
 
 	public enum Category {
-		COMBAT, MOVEMENT, RENDER, PLAYER, WORLD
+		COMBAT, MOVEMENT, RENDER, WORLD, PLAYER
 	}
 
 	public void toggle() {
