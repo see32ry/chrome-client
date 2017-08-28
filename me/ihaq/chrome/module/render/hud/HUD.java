@@ -23,6 +23,7 @@ public class HUD extends Module {
 	public HUD() {
 		super("HUD", Keyboard.KEY_F, Category.RENDER);
 		Chrome.INSTANCE.SETTING_MANAGER.addSetting(new Setting(this, "ArrayList", true));
+		Chrome.INSTANCE.SETTING_MANAGER.addSetting(new Setting(this, "TabGUI", true));
 		this.ar = new Arraylist();
 		this.tab = new TabGUI();
 	}
@@ -39,11 +40,5 @@ public class HUD extends Module {
 		Chrome.INSTANCE.EVENT_MANAGER.unregister(tab);
 	}
 
-	@EventTarget
-	public void onRender2D(EventRender2D e) {
-		/*fr.drawStringWithShadow(Chrome.INSTANCE.CLIENT_NAME + " | " + Chrome.INSTANCE.CLIENT_VERSION, 5, 5,
-				Colors.getColor());*/
-
-	}
 
 }

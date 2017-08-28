@@ -74,6 +74,17 @@ public class Setting {
 		return cValue;
 	}
 
+	public int getCurrentOptionIndex() {
+		int index = 0;
+		for (String s : options) {
+			if (s.equalsIgnoreCase(currentOption)) {
+				return index;
+			}
+			index++;
+		}
+		return index;
+	}
+
 	public void setCurrentValue(double cValue) {
 		this.cValue = cValue;
 	}
