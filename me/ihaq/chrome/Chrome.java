@@ -4,6 +4,7 @@ import org.lwjgl.opengl.Display;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 
+import me.ihaq.chrome.command.CommandManager;
 import me.ihaq.chrome.event.EventManager;
 import me.ihaq.chrome.event.EventTarget;
 import me.ihaq.chrome.event.events.misc.EventKeyboard;
@@ -23,17 +24,20 @@ public class Chrome {
 	public EventManager EVENT_MANAGER;
 	public ModuleManager MODULE_MANAGER;
 	public SettingManager SETTING_MANAGER;
+	public CommandManager COMMAND_MANAGER;
 
 	public void onEnable() {
 		EVENT_MANAGER = new EventManager();
 		MODULE_MANAGER = new ModuleManager();
 		SETTING_MANAGER = new SettingManager();
+		COMMAND_MANAGER = new CommandManager();
 
 		EVENT_MANAGER.register(this);
 
 		Display.setTitle(CLIENT_NAME + " | " + CLIENT_VERSION);
 
 		MODULE_MANAGER.loadMods();
+		COMMAND_MANAGER.loadCommands();
 	}
 
 	public void onDisable() {

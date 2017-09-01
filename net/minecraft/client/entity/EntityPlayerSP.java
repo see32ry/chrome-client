@@ -1,5 +1,6 @@
 package net.minecraft.client.entity;
 
+import me.ihaq.chrome.Chrome;
 import me.ihaq.chrome.event.events.move.EventMove;
 import me.ihaq.chrome.event.events.move.EventPostMotionUpdates;
 import me.ihaq.chrome.event.events.move.EventPreMotionUpdates;
@@ -298,7 +299,9 @@ public class EntityPlayerSP extends AbstractClientPlayer {
 	 * Sends a chat message from the player. Args: chatMessage
 	 */
 	public void sendChatMessage(String message) {
-		this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
+		if (!Chrome.INSTANCE.COMMAND_MANAGER.processCommand(message)) {
+			this.sendQueue.addToSendQueue(new C01PacketChatMessage(message));
+		}
 	}
 
 	/**
