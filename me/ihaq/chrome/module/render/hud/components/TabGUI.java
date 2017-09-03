@@ -196,16 +196,18 @@ public class TabGUI {
 		}
 	}
 
-	private void right() {
+	private void right(int key) {
 		if (this.screen == 0) {
-			this.screen = 1;
-		} else if (this.screen == 1 && getSettingForCurrentMod() == null) {
-			this.getCurrentModule().toggle();
-		} else if (this.screen == 1 & getSettingForCurrentMod() != null) {
-			this.screen = 2;
-		} else if (this.screen == 2) {
-			this.editMode = !this.editMode;
-		}
+            this.screen = 1;
+        } else if (this.screen == 1 && this.getCurrentModule() != null && this.getSettingForCurrentMod() == null) {
+            this.getCurrentModule().toggle();
+        } else if (this.screen == 1 && this.getSettingForCurrentMod() != null && this.getCurrentModule() != null && key == Keyboard.KEY_RETURN) {
+            this.getCurrentModule().toggle();
+        } else if (this.screen == 1 && this.getSettingForCurrentMod() != null && this.getCurrentModule() != null) {
+            this.screen = 2;
+        } else if (this.screen == 2) {
+            this.editMode = !this.editMode;
+        }
 
 	}
 
@@ -230,13 +232,13 @@ public class TabGUI {
 			this.down();
 			break;
 		case Keyboard.KEY_RIGHT:
-			this.right();
+			this.right(Keyboard.KEY_RIGHT);
 			break;
 		case Keyboard.KEY_LEFT:
 			this.left();
 			break;
 		case Keyboard.KEY_RETURN:
-			this.right();
+			this.right(Keyboard.KEY_RETURN);
 			break;
 		}
 	}

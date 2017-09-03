@@ -7,13 +7,21 @@ import net.minecraft.client.gui.FontRenderer;
 
 public class Module {
 
+	/** Common variables for every module. **/
 	protected static Minecraft mc = Minecraft.getMinecraft();
 	protected static EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
 	protected static FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
 
+	/** Name of the module. **/
 	private String name;
+
+	/** Holds the key that the module is currently bounded to. **/
 	private int keyCode;
+
+	/** Holds weather the module is toggled or not. **/
 	private boolean toggled;
+
+	/** Holds what category the module is in. **/
 	private Category category;
 
 	public Module(String name, int keyCode, Category category) {
@@ -23,10 +31,12 @@ public class Module {
 		this.toggled = false;
 	}
 
+	/** All the valid categories for every module. **/
 	public enum Category {
 		COMBAT, MOVEMENT, RENDER, WORLD, PLAYER
 	}
 
+	/** Toggles the module depending on its previous state. **/
 	public void toggle() {
 		this.toggled = !this.toggled;
 		if (this.toggled) {
@@ -36,40 +46,45 @@ public class Module {
 		}
 	}
 
+	/**
+	 * Called when the module is turned on. (Registers the module so it can use
+	 * events).
+	 **/
 	public void onEnable() {
 		Chrome.INSTANCE.EVENT_MANAGER.register(this);
 	}
 
+	/**
+	 * Called then the module is turned off. (Unregisters the module so none of the
+	 * events are usable.
+	 **/
 	public void onDisable() {
 		Chrome.INSTANCE.EVENT_MANAGER.unregister(this);
 	}
 
+	/** Returns weather the module is module is toggled or not. **/
 	public boolean isToggled() {
 		return this.toggled;
 	}
 
+	/** Returns the name of the module. **/
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	/** Returns the key that the module is currently bound too. **/
 	public int getKeyCode() {
 		return keyCode;
 	}
 
+	/** Sets what key the module is bound too. **/
 	public void setKeyCode(int keyCode) {
 		this.keyCode = keyCode;
 	}
 
+	/** Gets the category that the module belongs too. **/
 	public Category getCategory() {
 		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
 	}
 
 }

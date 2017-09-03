@@ -7,12 +7,18 @@ import me.ihaq.chrome.module.Module;
 public class Setting {
 
 	private Module module;
+
 	private String name, currentOption;
+
 	private double cValue, minValue, maxValue;
+
 	private boolean onlyInt, booleanValue;
+
 	private ArrayList<String> options;
+
 	private SettingMode mode;
 
+	/** All the possible modes a setting can be. **/
 	public enum SettingMode {
 		BOOLEAN, DIGIT, MODES
 	}
