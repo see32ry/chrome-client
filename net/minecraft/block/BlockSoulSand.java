@@ -1,6 +1,6 @@
 package net.minecraft.block;
 
-import me.ihaq.chrome.event.events.player.EventSlowDown;
+import me.ihaq.chrome.event.events.EventSlowDown;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

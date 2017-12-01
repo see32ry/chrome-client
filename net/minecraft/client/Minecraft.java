@@ -57,9 +57,9 @@ import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 
 import me.ihaq.chrome.Chrome;
-import me.ihaq.chrome.event.events.misc.EventKeyboard;
-import me.ihaq.chrome.event.events.misc.EventMiddleClick;
-import me.ihaq.chrome.event.events.update.EventTick;
+import me.ihaq.chrome.event.events.EventKeyboard;
+import me.ihaq.chrome.event.events.EventMiddleClick;
+import me.ihaq.chrome.event.events.EventTick;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;

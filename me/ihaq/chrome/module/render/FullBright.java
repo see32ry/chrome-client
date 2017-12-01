@@ -1,10 +1,10 @@
 package me.ihaq.chrome.module.render;
 
-import org.lwjgl.input.Keyboard;
-
 import me.ihaq.chrome.event.EventTarget;
-import me.ihaq.chrome.event.events.update.EventUpdate;
+import me.ihaq.chrome.event.events.EventUpdate;
+import me.ihaq.chrome.module.Category;
 import me.ihaq.chrome.module.Module;
+import org.lwjgl.input.Keyboard;
 
 public class FullBright extends Module {
 

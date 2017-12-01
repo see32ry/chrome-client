@@ -6,42 +6,57 @@ import me.ihaq.chrome.Chrome;
 
 public abstract class Event {
 
-	private boolean cancelled;
+    private boolean cancelled;
+    private Type type;
 
-	public enum State {
-		PRE("PRE", 0), POST("POST", 1);
-		private State(String string, int number) {
-		}
-	}
+    public Event(Type type) {
+        this.type = type;
+        cancelled = false;
+    }
 
-	public Event call() {
-		this.cancelled = false;
-		this.call(this);
-		return this;
-	}
+    /**
+     * The event can be either PRE or POST.
+     */
+    public enum Type {
+        PRE, POST
+    }
 
-	public boolean isCancelled() {
-		return this.cancelled;
-	}
+    public void call() {
+        cancelled = false;
 
-	public void setCancelled(boolean cancelled) {
+        ArrayHelper<Data> dataList = Chrome.INSTANCE.EVENT_MANAGER.get(this.getClass());
 
-		this.cancelled = cancelled;
-	}
+        if (dataList != null) {
+            for (Data data : dataList) {
+                try {
+                    data.target.invoke(data.source, this);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-	private static void call(Event event) {
-		ArrayHelper<Data> dataList = Chrome.INSTANCE.EVENT_MANAGER.get(event.getClass());
-		if (dataList != null) {
-			for (Data data : dataList) {
-				try {
-					data.target.invoke(data.source, event);
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				}
+    /**
+     * Returns the type of the event PRE or POST
+     */
+    public Type getType() {
+        return type;
+    }
 
-			}
-		}
-	}
+    /**
+     * Returns weather the event was canceled or not.
+     */
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    /**
+     * Allows you to set the event to cancelled.
+     */
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
+
 }

@@ -2,7 +2,7 @@ package net.minecraft.client.renderer.entity;
 
 import org.lwjgl.opengl.GL11;
 
-import me.ihaq.chrome.event.events.render.EventNameTags;
+import me.ihaq.chrome.event.events.EventNameTags;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
