@@ -13,6 +13,6 @@ public class PlayerUtils {
      **/
     public static void tellPlayer(String text) {
         Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(
-                ChatFormatting.WHITE + "[" + ChatFormatting.RED + Chrome.INSTANCE.CLIENT_NAME + ChatFormatting.WHITE + "] " + text));
+                ChatFormatting.WHITE + "[" + ChatFormatting.RED + Chrome.INSTANCE.NAME + ChatFormatting.WHITE + "] " + text));
     }
 }

@@ -12,6 +12,7 @@ public class BindCommand implements Command {
     @Override
     public boolean run(String[] args) {
         if (args.length == 3) {
+
             Module m = Chrome.INSTANCE.MODULE_MANAGER.getModule(args[1]);
 
             if (m == null)

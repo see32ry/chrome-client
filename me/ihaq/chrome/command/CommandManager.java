@@ -6,6 +6,7 @@ import java.util.Map;
 import me.ihaq.chrome.Chrome;
 import me.ihaq.chrome.command.commands.BindCommand;
 import me.ihaq.chrome.command.commands.HelpCommand;
+import me.ihaq.chrome.command.commands.ToggleCommand;
 import me.ihaq.chrome.utils.PlayerUtils;
 
 public class CommandManager {
@@ -31,6 +32,7 @@ public class CommandManager {
     public void loadCommands() {
         commands.put(new String[]{"help", "h"}, new HelpCommand());
         commands.put(new String[]{"bind", "b"}, new BindCommand());
+        commands.put(new String[]{"toggle", "t"}, new ToggleCommand());
     }
 
     public boolean processCommand(String rawMessage) {

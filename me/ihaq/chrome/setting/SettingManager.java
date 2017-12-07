@@ -10,7 +10,7 @@ public class SettingManager {
 	private ArrayList<Setting> settings;
 
 	public SettingManager() {
-		this.settings = new ArrayList();
+		this.settings = new ArrayList<Setting>();
 	}
 
 	/** Adds a setting to the ArrayList that holds them. **/
@@ -35,22 +35,20 @@ public class SettingManager {
 
 	/** Returns the settings that belong to the module provided. **/
 	public ArrayList<Setting> getSettingsForModule(Module m) {
-		ArrayList<Setting> settings = new ArrayList();
+		ArrayList<Setting> settings = new ArrayList<Setting>();
 
 		/**
 		 * Goes through all the settings and returns the settings that belong to that
 		 * module.
 		 **/
 		for (Setting s : this.settings) {
-			if (s.getModule().equals(m)) {
+			if (s.getModule().equals(m))
 				settings.add(s);
-			}
 		}
 
 		/** Checks if no settings were found and returns null. **/
-		if (settings.isEmpty()) {
+		if (settings.isEmpty())
 			return null;
-		}
 
 		return settings;
 	}

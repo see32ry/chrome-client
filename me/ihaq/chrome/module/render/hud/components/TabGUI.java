@@ -48,7 +48,7 @@ public class TabGUI {
         for (Category c : this.categoryValues) {
             if (this.getCurrentCategorry().equals(c)) {
                 Gui.drawRect(startX + 1, startY, startX + this.getWidestCategory() + 5 - 1, startY + 9 + 2,
-                        new Color(51, 00, 10, 190).getRGB());
+                        new Color(51, 0, 10, 190).getRGB());
             }
 
             String name = c.name();
@@ -65,7 +65,7 @@ public class TabGUI {
             for (Module m : getModsForCurrentCategory()) {
                 if (this.getCurrentModule().equals(m)) {
                     Gui.drawRect(startModsX + 1, startModsY, startModsX + this.getWidestMod() + 5 - 1,
-                            startModsY + 9 + 2, new Color(51, 00, 10, 190).getRGB());
+                            startModsY + 9 + 2, new Color(51, 0, 10, 190).getRGB());
                 }
                 fr.drawStringWithShadow(m.getName() + (Chrome.INSTANCE.SETTING_MANAGER.getSettingsForModule(m) != null ? ">" : ""), startModsX + 2 + (this.getCurrentModule().equals(m) ? 2 : 0),
                         startModsY + 2, m.isToggled() ? -1 : Color.GRAY.getRGB());
@@ -82,7 +82,7 @@ public class TabGUI {
 
                 if (this.getCurrentSetting().equals(s)) {
                     Gui.drawRect(startSettingX + 1, startSettingY, startSettingX + this.getWidestSetting() + 5 - 1,
-                            startSettingY + 9 + 2, new Color(51, 00, 10, 190).getRGB());
+                            startSettingY + 9 + 2, new Color(51, 0, 10, 190).getRGB());
                 }
                 if (s.isBoolean()) {
                     fr.drawStringWithShadow(s.getName() + ": " + s.getBooleanValue(),
@@ -104,8 +104,8 @@ public class TabGUI {
     }
 
     private void renderTopString(int x, int y) {
-        fr.drawStringWithShadow(ChatFormatting.WHITE + Chrome.INSTANCE.CLIENT_NAME + ChatFormatting.RESET + " v"
-                + Chrome.INSTANCE.CLIENT_VERSION, x, y, new Color(67, 00, 99).getRGB());
+        fr.drawStringWithShadow(ChatFormatting.WHITE + Chrome.INSTANCE.NAME + ChatFormatting.RESET + " v"
+                + Chrome.INSTANCE.VERSION, x, y, new Color(67, 0, 99).getRGB());
     }
 
     private void up() {
@@ -250,7 +250,7 @@ public class TabGUI {
     }
 
     private ArrayList<Module> getModsForCurrentCategory() {
-        ArrayList<Module> mods = new ArrayList();
+        ArrayList<Module> mods = new ArrayList<Module>();
         Category c = getCurrentCategorry();
         for (Module m : Chrome.INSTANCE.MODULE_MANAGER.getMods()) {
             if (m.getCategory().equals(c)) {
