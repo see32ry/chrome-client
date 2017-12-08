@@ -252,7 +252,7 @@ public class TabGUI {
     private ArrayList<Module> getModsForCurrentCategory() {
         ArrayList<Module> mods = new ArrayList<Module>();
         Category c = getCurrentCategorry();
-        for (Module m : Chrome.INSTANCE.MODULE_MANAGER.getMods()) {
+        for (Module m : Chrome.INSTANCE.MODULE_MANAGER.getModules()) {
             if (m.getCategory().equals(c)) {
                 mods.add(m);
             }
@@ -281,7 +281,7 @@ public class TabGUI {
 
     private int getWidestMod() {
         int width = 0;
-        for (Module m : Chrome.INSTANCE.MODULE_MANAGER.getMods()) {
+        for (Module m : Chrome.INSTANCE.MODULE_MANAGER.getModules()) {
             int cWidth = fr.getStringWidth(m.getName());
             if (cWidth > width) {
                 width = cWidth;

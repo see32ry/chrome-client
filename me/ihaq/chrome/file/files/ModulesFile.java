@@ -27,17 +27,15 @@ public class ModulesFile extends CustomFile {
 
     @Override
     public void loadFile() throws IOException {
+
         makeDirecotry();
 
 
-        for (Module module : Chrome.INSTANCE.MODULE_MANAGER.getMods()) {
+        for (Module module : Chrome.INSTANCE.MODULE_MANAGER.getModules()) {
 
-            if (!getFile(module).exists())
-                getFile(module).createNewFile();
-
+            makeModuleFile(module);
 
             FileReader fr = new FileReader(getFile(module));
-
 
             JsonObject jsonObject = getGson().fromJson(fr, JsonObject.class);
 
@@ -62,22 +60,17 @@ public class ModulesFile extends CustomFile {
 
                 JsonArray jsonArray = (JsonArray) jsonObject.get("settings");
 
-                for (JsonElement jsonElement : jsonArray) {
+                jsonArray.forEach(jsonElement -> settings.stream().filter(setting -> jsonElement.getAsJsonObject().has(setting.getName()))
+                        .forEach(setting -> {
+                            if (setting.isBoolean()) {
+                                setting.setBooleanValue(jsonElement.getAsJsonObject().get(setting.getName()).getAsBoolean());
+                            } else if (setting.isDigit()) {
+                                setting.setCurrentValue(jsonElement.getAsJsonObject().get(setting.getName()).getAsDouble());
+                            } else {
+                                setting.setCurrentOption(jsonElement.getAsJsonObject().get(setting.getName()).getAsString());
+                            }
 
-                    settings.stream().filter(setting -> jsonElement.getAsJsonObject().has(setting.getName()))
-                            .forEach(setting -> {
-                                if (setting.isBoolean()) {
-                                    setting.setBooleanValue(jsonElement.getAsJsonObject().get(setting.getName()).getAsBoolean());
-                                } else if (setting.isDigit()) {
-                                    setting.setCurrentValue(jsonElement.getAsJsonObject().get(setting.getName()).getAsDouble());
-                                } else {
-                                    setting.setCurrentOption(jsonElement.getAsJsonObject().get(setting.getName()).getAsString());
-                                }
-
-                            });
-
-                }
-
+                        }));
             }
 
 
@@ -94,10 +87,9 @@ public class ModulesFile extends CustomFile {
         makeDirecotry();
 
 
-        for (Module module : Chrome.INSTANCE.MODULE_MANAGER.getMods()) {
+        for (Module module : Chrome.INSTANCE.MODULE_MANAGER.getModules()) {
 
-            if (!getFile(module).exists())
-                getFile(module).createNewFile();
+            makeModuleFile(module);
 
             FileWriter fw = new FileWriter(getFile(module));
 
@@ -115,16 +107,15 @@ public class ModulesFile extends CustomFile {
                 JsonArray jsonArray = new JsonArray();
                 JsonObject jsonObject1 = new JsonObject();
 
-
-                for (Setting setting : settings) {
-                    if (setting.isBoolean()) {
+                
+                settings.forEach(setting -> {
+                    if (setting.isBoolean())
                         jsonObject1.addProperty(setting.getName(), setting.getBooleanValue());
-                    } else if (setting.isDigit()) {
+                    else if (setting.isDigit())
                         jsonObject1.addProperty(setting.getName(), setting.getCurrentValue());
-                    } else {
+                    else
                         jsonObject1.addProperty(setting.getName(), setting.getCurrentOption());
-                    }
-                }
+                });
 
                 jsonArray.add(jsonObject1);
                 jsonObject.add("settings", jsonArray);
@@ -143,6 +134,12 @@ public class ModulesFile extends CustomFile {
         if (!directory.exists())
             directory.mkdir();
     }
+
+    private void makeModuleFile(Module module) throws IOException {
+        if (!getFile(module).exists())
+            getFile(module).createNewFile();
+    }
+
 
     private File getFile(Module module) {
         return new File(directory, module.getName() + ".json");

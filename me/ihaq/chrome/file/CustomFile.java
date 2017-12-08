@@ -13,13 +13,16 @@ public abstract class CustomFile {
     public CustomFile(Gson gson, File file) {
         this.gson = gson;
         this.file = file;
-
         makeDirectory();
     }
 
     private void makeDirectory() {
-        if (file != null && !file.exists())
-            file.mkdir();
+        if (file != null && !file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException ignored) {
+            }
+        }
     }
 
     public abstract void loadFile() throws IOException;

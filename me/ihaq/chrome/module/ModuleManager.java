@@ -13,11 +13,10 @@ public class ModuleManager {
     /**
      * The ArrayList that holds all the modules.
      **/
-    private ArrayList<Module> mods;
+    private ArrayList<Module> modules;
 
     public ModuleManager() {
-        mods = new ArrayList<Module>();
-
+        modules = new ArrayList<Module>();
         Chrome.INSTANCE.EVENT_MANAGER.register(this);
     }
 
@@ -33,19 +32,19 @@ public class ModuleManager {
      * A methods that allows you to add a module to the array of all the modules.
      **/
     private void addModule(Module m) {
-        mods.add(m);
+        modules.add(m);
     }
 
     /**
      * Returns all the modules.
      **/
-    public ArrayList<Module> getMods() {
-        return mods;
+    public ArrayList<Module> getModules() {
+        return modules;
     }
 
     @EventTarget
     public void onKey(EventKeyboard eventKeyBoard) {
-        for (Module mod : mods) {
+        for (Module mod : modules) {
             if (mod.getKeyCode() == eventKeyBoard.getKey())
                 mod.toggle();
         }
@@ -54,7 +53,7 @@ public class ModuleManager {
     /**
      * Goes through all the modules and returns an array of all the toggled modules.
      **/
-    public ArrayList<Module> getToggledMods() {
+    public ArrayList<Module> getToggledModules() {
         ArrayList<Module> mods = new ArrayList<Module>();
         for (Module m : mods) {
             if (m.isToggled())
@@ -67,7 +66,7 @@ public class ModuleManager {
      * Tries to get the module by name, if none found it returns null.
      **/
     public Module getModule(String name) {
-        for (Module m : mods) {
+        for (Module m : modules) {
             if (m.getName().equalsIgnoreCase(name))
                 return m;
         }
@@ -78,7 +77,7 @@ public class ModuleManager {
      * Tries to get the module by class, in none found it returns null.
      **/
     public Module getModule(Class<? extends Module> clazz) {
-        for (Module m : mods) {
+        for (Module m : modules) {
             if (m.getClass() == clazz)
                 return m;
         }
