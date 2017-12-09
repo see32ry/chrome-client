@@ -15,10 +15,10 @@ public class ToggledModules {
 
     @EventTarget
     public void onRender(EventRender2D e) {
-        if (!Chrome.INSTANCE.SETTING_MANAGER.getSetting(Chrome.INSTANCE.MODULE_MANAGER.getModule(HUD.class), "ArrayList").getBooleanValue()) {
-            return;
-        }
 
+        if (!HUD.arrayList.getBooleanValue())
+            return;
+        
         FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
         ArrayList<Module> mods = Chrome.INSTANCE.MODULE_MANAGER.getToggledModules();
 

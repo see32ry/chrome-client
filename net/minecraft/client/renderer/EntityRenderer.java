@@ -1538,8 +1538,7 @@ public class EntityRenderer implements IResourceManagerReloadListener {
         GlStateManager.disableFog();
 
         GlStateManager.pushMatrix();
-        EventRender3D render3D = new EventRender3D(partialTicks);
-        render3D.call();
+        new EventRender3D(partialTicks).call();
         GlStateManager.popMatrix();
 
         if (entity.posY + (double) entity.getEyeHeight() >= 128.0D

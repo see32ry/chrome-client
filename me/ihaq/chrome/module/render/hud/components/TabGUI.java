@@ -2,11 +2,13 @@ package me.ihaq.chrome.module.render.hud.components;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.ihaq.chrome.Chrome;
+import me.ihaq.chrome.event.EventPriority;
 import me.ihaq.chrome.event.EventTarget;
 import me.ihaq.chrome.event.events.EventKeyboard;
 import me.ihaq.chrome.event.events.EventRender2D;
 import me.ihaq.chrome.module.Category;
 import me.ihaq.chrome.module.Module;
+import me.ihaq.chrome.module.render.hud.HUD;
 import me.ihaq.chrome.setting.Setting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -38,8 +40,12 @@ public class TabGUI {
         this.categoryValues.addAll(Arrays.asList(Category.values()));
     }
 
-    @EventTarget
+    @EventTarget(priority = EventPriority.HIGH)
     public void onRedner(EventRender2D e) {
+
+        if (!HUD.tabGui.getBooleanValue())
+            return;
+
         this.renderTopString(5, 5);
         int startX = 5;
         int startY = (5 + 9) + 2;

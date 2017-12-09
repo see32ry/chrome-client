@@ -55,7 +55,7 @@ public class ModuleManager {
      **/
     public ArrayList<Module> getToggledModules() {
         ArrayList<Module> mods = new ArrayList<Module>();
-        for (Module m : mods) {
+        for (Module m : modules) {
             if (m.isToggled())
                 mods.add(m);
         }

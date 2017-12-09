@@ -183,8 +183,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
      */
     public void onUpdate() {
 
-        EventUpdate update = new EventUpdate(Event.Type.PRE);
-        update.call();
+        new EventUpdate(Event.Type.PRE).call();
 
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ))) {
             super.onUpdate();
@@ -197,8 +196,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             } else {
                 this.onUpdateWalkingPlayer();
 
-                EventMotion post = new EventMotion(Event.Type.POST, this.rotationYaw, this.rotationPitch, this.onGround, this.posY);
-                post.call();
+                new EventMotion(Event.Type.POST, this.rotationYaw, this.rotationPitch, this.onGround, this.posY).call();
             }
         }
     }
